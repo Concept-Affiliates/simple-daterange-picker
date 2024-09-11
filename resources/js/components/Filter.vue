@@ -35,7 +35,6 @@
 
 <script>
 import debounce from 'lodash/debounce'
-import moment from 'moment-timezone';
 
 export default {
   emits: ['change'],
