@@ -15,15 +15,16 @@ class Daterangepicker extends Filter
     private Carbon|null $minDate = null;
     private Carbon|null $maxDate = null;
     private array|null $ranges = null;
+    private string $timezone = 'America/New_York';
 
     public function __construct(
         private string $column,
         private string $default = Helper::TODAY,
         private string $orderByColumn = 'id',
-        private string $orderByDir = 'asc',
+        private string $orderByDir = 'asc'
     ) {
         //Often date range components use as default date the past dates
-        $this->maxDate = Carbon::today();
+        $this->maxDate = Carbon::today()->timezone($this->timezone);
     }
 
     /**
@@ -50,7 +51,7 @@ class Daterangepicker extends Filter
     public function apply(NovaRequest $request, $query, $value): Builder
     {
         // set timezone to EST
-        date_default_timezone_set('America/New_York');
+        date_default_timezone_set($this->timezone);
         $utc_offset = abs(date('Z')) / 3600; // convert utc offset in seconds back to hours
         date_default_timezone_set('UTC');
 
