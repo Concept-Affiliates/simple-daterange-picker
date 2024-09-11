@@ -8,6 +8,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Rpj\Daterangepicker\DateHelper as Helper;
+use Illuminate\Support\Facades\DB;
 
 class Daterangepicker extends Filter
 {
@@ -41,11 +42,22 @@ class Daterangepicker extends Filter
      */
     public function apply(NovaRequest $request, $query, $value): Builder
     {
+        // set timezone to EST
+        date_default_timezone_set('America/New_York');
+        $utc_offset = abs(date('Z')) / 3600; // convert utc offset in seconds back to hours
+        date_default_timezone_set('UTC');
+
         [$start, $end] = Helper::getParsedDatesGroupedRanges($value);
 
         if ($start && $end) {
+            /*
             return $query->whereBetween($this->column, [$start, $end])
                 ->orderBy($this->orderByColumn, $this->orderByDir);
+            */
+
+            // use timezone offset
+            return $query->whereBetween(DB::raw("{$this->column} + INTERVAL {$utc_offset} HOUR"), [$start, $end])
+                         ->orderBy($this->orderByColumn, $this->orderByDir);
         }
 
         return $query;
