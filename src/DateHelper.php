@@ -48,65 +48,65 @@ class DateHelper
 
     public static function getParsedDatesGroupedRanges($value): array
     {
-        if ($value == self::ALL) {
+        if ($value == self::ALL)
             return [null, null];
-        }
 
         $start = Carbon::now()->timezone(self::TIMEZONE);
-        $end = $start->clone()->timezone(self::TIMEZONE);
+        $end = $start->clone();
 
         switch ($value) {
             case self::TODAY:
                 break;
             case self::YESTERDAY:
-                $start->subDay(1)->timezone(self::TIMEZONE);
-                $end = $start->clone()->timezone(self::TIMEZONE);
+                $start->subDay(1);
+                $end = $start->clone();
                 break;
             case self::LAST_2_DAYS:
-                $start->subDays(1)->timezone(self::TIMEZONE);
+                $start->subDays(1);
                 break;
             case self::LAST_7_DAYS:
-                $start->subDays(6)->timezone(self::TIMEZONE);
+                $start->subDays(6);
                 break;
             case self::THIS_WEEK:
-                $start->startOfWeek(Carbon::MONDAY)->timezone(self::TIMEZONE);
+                $start->startOfWeek(Carbon::MONDAY);
                 break;
             case self::LAST_WEEK:
-                $start->startOfWeek(Carbon::MONDAY)->subWeek(1)->timezone(self::TIMEZONE);
-                $end = $start->clone()->endOfWeek(Carbon::SUNDAY)->timezone(self::TIMEZONE);
+                $start->startOfWeek(Carbon::MONDAY)->subWeek(1);
+                $end = $start->clone()->endOfWeek(Carbon::SUNDAY);
                 break;
             case self::LAST_30_DAYS:
-                $start->subDays(30)->timezone(self::TIMEZONE);
+                $start->subDays(30);
                 break;
             case self::THIS_MONTH:
-                $start->startOfMonth()->timezone(self::TIMEZONE);
+                $start->startOfMonth();
                 break;
             case self::LAST_MONTH:
-                $start->startOfMonth()->subMonth()->timezone(self::TIMEZONE);
-                $end = $start->clone()->endOfMonth()->timezone(self::TIMEZONE);
+                $start->startOfMonth()->subMonth();
+                $end = $start->clone()->endOfMonth();
                 break;
             case self::LAST_6_MONTHS:
-                $start->subMonths(6)->timezone(self::TIMEZONE);
+                $start->subMonths(6);
                 break;
             case self::THIS_YEAR:
-                $start->startOfYear()->timezone(self::TIMEZONE);
+                $start->startOfYear();
                 break;
             default:
+                //Ex. 2020-06-15 to 2023-06-15
                 $parsed = explode(' to ', $value);
                 if (count($parsed) == 1) {
-                    $start = Carbon::createFromFormat('Y-m-d', $value)->timezone(self::TIMEZONE);
-                    $end = $start->clone()->timezone(self::TIMEZONE);
+                    $start = Carbon::createFromFormat('Y-m-d', $value);
+                    $end = $start->clone();
                 } elseif (count($parsed) == 2) {
-                    $start = Carbon::createFromFormat('Y-m-d', $parsed[0])->timezone(self::TIMEZONE);
-                    $end = Carbon::createFromFormat('Y-m-d', $parsed[1])->timezone(self::TIMEZONE);
+                    $start = Carbon::createFromFormat('Y-m-d', $parsed[0]);
+                    $end = Carbon::createFromFormat('Y-m-d', $parsed[1]);
                 } else {
                     throw new Exception('Date range picker: Date format incorrect.');
                 }
         }
 
         return [
-            $start->setTime(0, 0, 0)->timezone(self::TIMEZONE),
-            $end->setTime(23, 59, 59)->timezone(self::TIMEZONE),
+            $start->setTime(0, 0, 0),
+            $end->setTime(23, 59, 59),
         ];
     }
 }
