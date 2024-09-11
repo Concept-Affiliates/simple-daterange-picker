@@ -34,6 +34,13 @@ class Daterangepicker extends Filter
     public $component = 'daterangepicker';
 
     /**
+     * The displayable name of the filter.
+     *
+     * @var string
+     */
+    public $name = 'Date Range';
+
+    /**
      * Apply the filter to the given query.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
