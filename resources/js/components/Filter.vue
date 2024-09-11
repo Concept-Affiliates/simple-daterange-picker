@@ -124,8 +124,8 @@ export default {
       $(idSelector).daterangepicker({
         "startDate": ref.startDate,
 			  "endDate": ref.endDate,
-        "minDate": (minDate ? moment(minDate) : null),
-        "maxDate": (maxDate ? moment(maxDate) : null),
+        "minDate": (minDate ? moment(minDate).tz('America/New_York') : null),
+        "maxDate": (maxDate ? moment(maxDate).tz('America/New_York') : null),
         "ranges": ref.parseRanges(),
       }, function(start, end, label) {
         if (start && end) {
@@ -148,15 +148,15 @@ export default {
     },
     parseDates: function() {
       const dateRange = this.filter.currentValue
-      let startDate = moment()
-      let endDate = moment()
+      let startDate = moment().tz('America/New_York')
+      let endDate = moment().tz('America/New_York')
 
       if (dateRange) {
         const parsedDateRange = dateRange.split(' to ')
         if (parsedDateRange.length == 2) {
           try {
-            startDate = moment(parsedDateRange[0], "YYYY-MM-DD")
-            endDate = moment(parsedDateRange[1], "YYYY-MM-DD")
+            startDate = moment(parsedDateRange[0], "YYYY-MM-DD").tz('America/New_York')
+            endDate = moment(parsedDateRange[1], "YYYY-MM-DD").tz('America/New_York')
           } catch(e){}
         }
       }
@@ -171,7 +171,7 @@ export default {
       let parsedRanges = {};
 
       for(let i=0; i<ranges.length; i++) {
-        parsedRanges[ranges[i]['label']] = [moment(ranges[i][0]), moment(ranges[i][1])]
+        parsedRanges[ranges[i]['label']] = [moment(ranges[i][0]).tz('America/New_York'), moment(ranges[i][1]).tz('America/New_York')]
       }
 
       return parsedRanges;
