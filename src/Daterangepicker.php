@@ -56,8 +56,11 @@ class Daterangepicker extends Filter
             */
 
             // use timezone offset
-            return $query->whereBetween(DB::raw("{$this->column} + INTERVAL {$utc_offset} HOUR"), [$start, $end])
-                         ->orderBy($this->orderByColumn, $this->orderByDir);
+            return $query->whereBetween($this->column, [
+                DB::raw("'$start' + INTERVAL {$utc_offset} HOUR"),
+                DB::raw("'$end' + INTERVAL {$utc_offset} HOUR")
+                ]
+            )->orderBy($this->orderByColumn, $this->orderByDir);
         }
 
         return $query;
