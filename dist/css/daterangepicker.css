@@ -393,72 +393,73 @@
 }
 
 /* Dark mode styles applied directly */
-.daterangepicker.dark {
-    background-color: #333;
-    border-color: #444;
-}
+:is(.dark) {
+    .daterangepicker {
+        background-color: #333;
+        border-color: #444;
+    }
 
-.daterangepicker.dark:before {
-    border-bottom: 7px solid #555;
-}
+    .daterangepicker:before {
+        border-bottom: 7px solid #555;
+    }
 
-.daterangepicker.dark:after {
-    border-bottom: 6px solid #333;
-}
+    .daterangepicker:after {
+        border-bottom: 6px solid #333;
+    }
 
-.daterangepicker.dark .calendar-table {
-    border-color: #444;
-    background-color: #333;
-}
+    .daterangepicker .calendar-table {
+        border-color: #444;
+        background-color: #333;
+    }
 
-.daterangepicker.dark td,
-.daterangepicker.dark th {
-    color: #eee;
-    border-color: #444;
-}
+    .daterangepicker td,
+    .daterangepicker th {
+        color: #eee;
+        border-color: #444;
+    }
 
-.daterangepicker.dark td.available:hover,
-.daterangepicker.dark th.available:hover {
-    background-color: #555;
-    border-color: transparent;
-    color: #eee;
-}
+    .daterangepicker td.available:hover,
+    .daterangepicker th.available:hover {
+        background-color: #555;
+        border-color: transparent;
+        color: #eee;
+    }
 
-.daterangepicker.dark td.off,
-.daterangepicker.dark td.off.end-date,
-.daterangepicker.dark td.off.in-range,
-.daterangepicker.dark td.off.start-date {
-    background-color: #333;
-    border-color: transparent;
-    color: #999;
-}
+    .daterangepicker td.off,
+    .daterangepicker td.off.end-date,
+    .daterangepicker td.off.in-range,
+    .daterangepicker td.off.start-date {
+        background-color: #333;
+        border-color: transparent;
+        color: #999;
+    }
 
-.daterangepicker.dark td.in-range {
-    background-color: #444;
-    color: #fff;
-}
+    .daterangepicker td.in-range {
+        background-color: #444;
+        color: #fff;
+    }
 
-.daterangepicker.dark td.active,
-.daterangepicker.dark td.active:hover {
-    background-color: #007bff;
-    color: #fff;
-}
+    .daterangepicker td.active,
+    .daterangepicker td.active:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
 
-.daterangepicker.dark select {
-    background: #444;
-    border: 1px solid #555;
-    color: #eee;
-}
+    .daterangepicker select {
+        background: #444;
+        border: 1px solid #555;
+        color: #eee;
+    }
 
-.daterangepicker.dark .drp-buttons {
-    border-top: 1px solid #444;
-}
+    .daterangepicker .drp-buttons {
+        border-top: 1px solid #444;
+    }
 
-.daterangepicker.dark .ranges li:hover {
-    background-color: #555;
-}
+    .daterangepicker .ranges li:hover {
+        background-color: #555;
+    }
 
-.daterangepicker.dark .ranges li.active {
-    background-color: #007bff;
+    .daterangepicker .ranges li.active {
+        background-color: #007bff;
+    }
 }
-
