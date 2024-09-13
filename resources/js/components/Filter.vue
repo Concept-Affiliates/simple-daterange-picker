@@ -6,7 +6,7 @@
         <input type="text" class="hidden">
         <input
           :id="id"
-          class="block w-full form-control form-control-sm form-input form-input-bordered text-sm px-1"
+          class="block w-full form-control form-control-sm form-input form-input-bordered text-sm px-1 form-control-bordered"
           :class="{ 'text-white': (value == null) }"
           type="text"
           :dusk="`${filter.name}-daterange-filter`"
