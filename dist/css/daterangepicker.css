@@ -462,4 +462,9 @@
     .daterangepicker .ranges li.active {
         background-color: #007bff;
     }
+
+    .daterangepicker.show-ranges.ltr .drp-calendar.left,
+    .daterangepicker.show-ranges.single.ltr .drp-calendar.left {
+        border-left: 1px solid #444;
+    }
 }
