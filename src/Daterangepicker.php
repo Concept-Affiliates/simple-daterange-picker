@@ -115,6 +115,13 @@ class Daterangepicker extends Filter
         return null;
     }
 
+    public function setLabel($label): self
+    {
+        $this->label_name = $label;
+
+        return $this;
+    }
+
     public function setMinDate(Carbon $minDate): self
     {
         $this->minDate = $minDate;
