@@ -16,6 +16,7 @@ class Daterangepicker extends Filter
     private Carbon|null $maxDate = null;
     private array|null $ranges = null;
     private string $timezone = 'America/New_York';
+    private string $label_name = 'created_at';
 
     public function __construct(
         private string $column,
@@ -40,9 +41,15 @@ class Daterangepicker extends Filter
      * @var string
      */
     //public $name = 'Date Range';
+    
+    /**
+     * Get the displayable name of the filter.
+     *
+     * @return string
+     */
     public function name()
     {
-        return 'Date Range';
+        return 'Date Range - '.$this->label_name;
     }
 
     /**
