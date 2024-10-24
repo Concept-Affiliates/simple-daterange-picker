@@ -39,7 +39,11 @@ class Daterangepicker extends Filter
      *
      * @var string
      */
-    public $name = 'Date Range';
+    //public $name = 'Date Range';
+    public function name()
+    {
+        return 'Date Range';
+    }
 
     /**
      * Apply the filter to the given query.
