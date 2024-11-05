@@ -5,10 +5,10 @@ namespace Rpj\Daterangepicker;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Rpj\Daterangepicker\DateHelper as Helper;
-use Illuminate\Support\Facades\DB;
 
 class Daterangepicker extends Filter
 {
@@ -62,9 +62,9 @@ class Daterangepicker extends Filter
     public function apply(NovaRequest $request, $query, $value): Builder
     {
         // set timezone to EST
-        date_default_timezone_set($this->timezone);
-        $utc_offset = abs(date('Z')) / 3600; // convert utc offset in seconds back to hours
-        date_default_timezone_set('UTC');
+        //date_default_timezone_set($this->timezone);
+        //$utc_offset = abs(date('Z')) / 3600; // convert utc offset in seconds back to hours
+        //date_default_timezone_set('UTC');
 
         [$start, $end] = Helper::getParsedDatesGroupedRanges($value);
 
@@ -74,10 +74,21 @@ class Daterangepicker extends Filter
                 ->orderBy($this->orderByColumn, $this->orderByDir);
             */
 
+            /*
             // use timezone offset
             return $query->whereBetween($this->column, [
                 DB::raw("'$start' + INTERVAL {$utc_offset} HOUR"),
                 DB::raw("'$end' + INTERVAL {$utc_offset} HOUR")
+                ]
+            )->orderBy($this->orderByColumn, $this->orderByDir);
+            */
+
+            // use CONVERT_TZ as needs to be daylight savings proof
+            return $query->whereBetween(
+                DB::raw("CONVERT_TZ({$this->column}, 'UTC', '{$this->timezone}')"),
+                [
+                    DB::raw("CONVERT_TZ('$start', 'UTC', '{$this->timezone}')"),
+                    DB::raw("CONVERT_TZ('$end', 'UTC', '{$this->timezone}')")
                 ]
             )->orderBy($this->orderByColumn, $this->orderByDir);
         }
