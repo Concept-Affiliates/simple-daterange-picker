@@ -87,8 +87,8 @@ class Daterangepicker extends Filter
             return $query->whereBetween(
                 DB::raw("CONVERT_TZ({$this->column}, 'UTC', '{$this->timezone}')"),
                 [
-                    DB::raw("CONVERT_TZ('$start', 'UTC', '{$this->timezone}')"),
-                    DB::raw("CONVERT_TZ('$end', 'UTC', '{$this->timezone}')")
+                    $start,
+                    $end
                 ]
             )->orderBy($this->orderByColumn, $this->orderByDir);
         }
